@@ -1,0 +1,504 @@
+\documentclass[11pt,english,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage[landscape]{geometry}
+\usepackage{color,graphicx,overpic}
+\usepackage { amsmath , amssymb , amsthm }
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{amsfonts}
+\usepackage{array,booktabs}
+\usepackage{textcomp}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{environ}
+\usepackage{xcolor-material}
+\usepackage{circuitikz}
+\usepackage{booktabs}
+\usepackage{hhline}
+\usepackage[normalem]{ulem}
+\usepackage{ragged2e} 
+\newcommand*{\carry}[1][1]{\overset{1}}
+
+\newcommand*{\carryR}[1][1]{\overset{\textcolor{GoogleRed}{1}}}
+\newcolumntype{B}[1]{r*{#1}{@{\,}r}}
+
+\usetikzlibrary{arrows, shapes.gates.logic.US, calc}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\ctikzset{bipoles/length=.8cm}
+\tikzset{baseline={([yshift=-.6ex]current bounding box.center)}}
+\geometry{top=-0.5cm,left=1cm,right=1cm,bottom=1cm}
+\usepackage[table]{xcolor}
+\pagestyle{empty} % Turn off header and footer
+\usepackage{karnaugh-map}
+
+% \renewcommand\rmdefault{phv} % Arial
+% \renewcommand\sfdefault{phv} % Arial
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%x
+  {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+  {-1explus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+  {\normalfont\small\bfseries}}
+\makeatother
+
+\setcounter{secnumdepth}{0} % Don't print section numbers
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+\definecolor{KarRed}{rgb}{1,0.73,0.749}
+\definecolor{KarGreen}{rgb}{0.678,1,0.725}
+
+
+\begin{document}
+
+\raggedright\
+
+\begin{center}
+	\Large{\textbf{\textcolor{GoogleRed}{\textsc{Tema 2: Sistemas Numéricos y Aritmética Binaria}}}}
+\end{center}
+
+\footnotesize
+\begin{multicols}{3}
+		
+	\centering\section{\textcolor{MaterialPurple}{Sistemas Binarios}}
+	\vspace{2 mm}
+	\begin{tabular}{| c | c | c |}
+				    		
+		\hline
+		\rowcolor{GoogleBlue} & \multicolumn{2}{c|}{\bfseries{\textcolor{white}{Binario}}}
+		\\
+		\hhline{|>{\arrayrulecolor{GoogleBlue}}->{\arrayrulecolor{Black}}|>{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}-}
+				  				
+		\rowcolor{GoogleBlue}\multirow{-2}{*}{\bfseries{\textcolor{white}{\bfseries{Decimal}}}} & \textcolor{white}{\bfseries{BIN}}                                                                                    & \textcolor{white}{\bfseries{BCD}}                                                                                    
+				
+		\\
+		\hline
+		\rowcolor{GoogleBlue!10}\bfseries{0}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0} & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0} 
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{1}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}   & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}   
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{2}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}   
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{3}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}     
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{4}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{5}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}     
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{6}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}     & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}     
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{7}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}       
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{8}                                                    & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{9}                                                    & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}     
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{10}                                                   & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}     &                                                                                                                      
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{11}                                                   & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}       &                                                                                                                      
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{12}                                                   & \textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}     &                                                                                                                      
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{13}                                                   & \textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}       &                                                                                                                      
+		\\
+		\rowcolor{GoogleBlue!10}\bfseries{14}                                                   & \textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}       &                                                                                                                      
+		\\
+		\rowcolor{GoogleBlue!20}\bfseries{15}                                                   & \textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}         &                                                                                                                      
+		\\
+		\hline
+				  		
+	\end{tabular}
+	\vspace{2 mm}
+	\centering\section{\textcolor{MaterialPurple}{Detectores de Error}}
+		  		  		
+	\subsection{\textcolor{GoogleBlue}{Bit de Paridad}}
+		  		  		
+	\justify{\hspace{\parindent}Se añade un bit adicional para evitar que la pérdida de un dato pueda resultar en un valor en el código original. \textbf{Solo detecta} si hay error, para saber dónde y/o corregirlo $\rightarrow$ Código de Hamming.}
+		
+	\Centering 
+	\vspace{2 mm}
+		  		  		
+	\begin{tabular}{| c | c | c | c |}
+				    		
+		\hline
+		\rowcolor{GoogleGreen} & \bfseries{\textcolor{white}{BCD}} & \multicolumn{2}{c|}{\bfseries{\textcolor{white}{Paridad}}}
+		\\
+		\hhline{|>{\arrayrulecolor{GoogleGreen}}->{\arrayrulecolor{Black}}|>{\arrayrulecolor{GoogleGreen}}->{\arrayrulecolor{Black}}|>{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}-}
+				  				
+		\rowcolor{GoogleGreen}\multirow{-2}{*}{\bfseries{\textcolor{white}{\bfseries{Decimal}}}} & \textcolor{white}{\bfseries{8421}}                                                                                   & \textcolor{white}{\bfseries{Par}} & \textcolor{white}{\bfseries{Impar}} 
+				
+		\\
+		\hline
+		\rowcolor{GoogleGreen!10}\bfseries{0}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0} & \textcolor{MaterialIndigo}{0}     & \textcolor{MaterialPink}{1}         
+		\\
+		\rowcolor{GoogleGreen!20}\bfseries{1}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}   & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}       
+		\\
+		\rowcolor{GoogleGreen!10}\bfseries{2}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}       
+		\\
+		\rowcolor{GoogleGreen!20}\bfseries{3}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}     & \textcolor{MaterialPink}{1}         
+		\\
+		\rowcolor{GoogleGreen!10}\bfseries{4}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}       
+		\\
+		\rowcolor{GoogleGreen!20}\bfseries{5}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}     & \textcolor{MaterialPink}{1}         
+		\\
+		\rowcolor{GoogleGreen!10}\bfseries{6}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}     & \textcolor{MaterialIndigo}{0}     & \textcolor{MaterialPink}{1}         
+		\\
+		\rowcolor{GoogleGreen!20}\bfseries{7}                                                    & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}       & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}       
+		\\
+		\rowcolor{GoogleGreen!10}\bfseries{8}                                                    & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}       
+		\\
+		\rowcolor{GoogleGreen!20}\bfseries{9}                                                    & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}     & \textcolor{MaterialPink}{1}         
+		\\
+		\hline
+				  		
+	\end{tabular}
+		  		  		
+	\vspace{2 mm}
+		  		  		
+	\justify{\hspace{\parindent} Se comprueba el número de \textcolor{MaterialPink}{1}s, añadiéndolo o poniendo un \textcolor{MaterialIndigo}{0}, dando lugar a dos codificaciones:}
+		
+	\Centering
+	\vspace{2 mm}
+	\begin{itemize}
+		\item[\textcolor{MaterialLightBlue}{\textbullet}] \textcolor{MaterialLightBlue}{\textbf{\scshape{Código Par}}}
+		\item[\textcolor{MaterialLightBlue}{\textbullet}] \textcolor{MaterialLightBlue}{\textbf{\scshape{Código Impar}}}
+	\end{itemize}
+		  		  		  		  		
+	\columnbreak
+		
+	\subsection{\textcolor{GoogleBlue}{Código de Hamming}}
+	$BCD = \textcolor{MaterialTeal}{b_{7}} \textcolor{MaterialBlueGrey}{b_{6}} \textcolor{MaterialPurple}{b_{5}}  \textcolor{GoogleGreen}{b_{3}} $  
+		
+	\begin{tabular}{| c | c | c | c | c | c | c | c |}
+				    		
+		\hline
+		\rowcolor{GoogleYellow}                & \multicolumn{7}{c|}{\bfseries{\textcolor{white}{Código de Hamming}}}                          
+		\\
+		\hhline{|>{\arrayrulecolor{GoogleYellow}}->{\arrayrulecolor{Black}}|>{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}-}
+				  				
+		\rowcolor{GoogleYellow} \multirow{-2}{*}{\bfseries{\textcolor{white}{Decimal}}}
+		                                       & \cellcolor{GoogleYellow!70}\textcolor{white}{\bfseries{$\textcolor{MaterialTeal}{b_{7}}$}}     
+		                                       & \cellcolor{GoogleYellow!70}\textcolor{white}{\bfseries{$\textcolor{MaterialBlueGrey}{b_{6}}$}} 
+		                                       & \cellcolor{GoogleYellow!70}\textcolor{white}{\bfseries{$\textcolor{MaterialPurple}{b_{5}}$}}   
+		                                       & \textcolor{white}{\bfseries{$b_{4}$}}                                                          
+		                                       & \cellcolor{GoogleYellow!70}\textcolor{white}{\bfseries{$\textcolor{GoogleGreen}{b_{3}}$}}      
+		                                       & \textcolor{white}{\bfseries{$b_{2}$}}                                                          
+		                                       & \textcolor{white}{\bfseries{$b_{1}$}}                                                          
+		\\
+		\hline
+		\rowcolor{GoogleYellow!10}\bfseries{0} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0} 
+		\\
+		\rowcolor{GoogleYellow!20}\bfseries{1} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}
+		\\
+		\rowcolor{GoogleYellow!10}\bfseries{2} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}
+		\\
+		\rowcolor{GoogleYellow!20}\bfseries{3} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0} 
+		\\
+		\rowcolor{GoogleYellow!10}\bfseries{4} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0} 
+		\\
+		\rowcolor{GoogleYellow!20}\bfseries{5} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1} 
+		\\
+		\rowcolor{GoogleYellow!10}\bfseries{6} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1} 
+		\\
+		\rowcolor{GoogleYellow!20}\bfseries{7} &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0} 
+		\\
+		\rowcolor{GoogleYellow!10}\bfseries{8} &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}
+		\\
+		\rowcolor{GoogleYellow!20}\bfseries{9} &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialPink}{1}            &                                                                                                
+		\textcolor{MaterialIndigo}{0}          &                                                                                                
+		\textcolor{MaterialIndigo}{0} 
+		\\
+		\hline
+				  		
+	\end{tabular}
+		  		  		
+	\begin{tabular}{c c}
+		\begin{minipage}[t][4cm][t]{4cm}
+		\vspace{0.2cm}
+		\begin{itemize}
+		\item[\textcolor{MaterialLightBlue}{\textbullet}] \textcolor{MaterialLightBlue}{\textbf{\scshape{Det. Paridad}}$\rightarrow$}
+		\\
+		\textcolor{MaterialLightBlue}{$\begin{cases}
+		b_{1} = \textcolor{GoogleGreen}{b_{3}} \oplus \textcolor{MaterialPurple}{b_{5}} \oplus \textcolor{MaterialTeal}{b_{7}}   \\	
+		b_{2} = \textcolor{GoogleGreen}{b_{3}} \oplus \textcolor{MaterialBlueGrey}{b_{6}} \oplus \textcolor{MaterialTeal}{b_{7}}  \\
+		b_{4} = \textcolor{MaterialPurple}{b_{5}} \oplus \textcolor{MaterialBlueGrey}{b_{6}} \oplus \textcolor{MaterialTeal}{b_{7}} 
+		\end{cases}$ }
+		\item[\textcolor{MaterialPink200}{\textbullet}] \textcolor{MaterialPink200}{\textbf{\scshape{Det. Error}}$\rightarrow$}
+		\\
+		\textcolor{MaterialPink200}{$\begin{cases}
+		c_{1} = \textcolor{MaterialLightBlue}{b_{1}} \oplus \textcolor{GoogleGreen}{b_{3}} \oplus \textcolor{MaterialPurple}{b_{5}} \oplus \textcolor{MaterialTeal}{b_{7}}   \\	
+		c_{2} = \textcolor{MaterialLightBlue}{b_{2}} \oplus \textcolor{GoogleGreen}{b_{3}} \oplus \textcolor{MaterialBlueGrey}{b_{6}} \oplus \textcolor{MaterialTeal}{b_{7}}  \\
+		c_{3} = \textcolor{MaterialLightBlue}{b_{4}} \oplus \textcolor{MaterialPurple}{b_{5}} \oplus \textcolor{MaterialBlueGrey}{b_{6}} \oplus \textcolor{MaterialTeal}{b_{7}} 
+		\end{cases}$} 	 
+		\end{itemize}
+		\end{minipage}
+		  &   
+					
+		\begin{minipage}[t][4cm][c]{4cm}
+		\def\firstcircle{(0,0) circle (1cm)}
+		\def\secondcircle{(60:1.3cm) circle (1cm)}
+		\def\thirdcircle{(0:1.3cm) circle (1cm)}
+		\begin{tikzpicture}
+		\begin{scope}[shift={(3cm,-5cm)}, fill opacity=0.5]
+		\fill[red] \firstcircle;
+		\fill[green] \secondcircle;
+		\fill[blue] \thirdcircle;
+		\draw \firstcircle node[below] {};
+		\draw \secondcircle node [above] {};
+		\draw \thirdcircle node [below] {};
+		\node at (0,0) (D) {\textbf{\textcolor{Blue}{$b_{2}$}}};
+		\node at (0,0) (D) {\textbf{\textcolor{Blue}{$b_{2}$}}};
+		\node at (0.65,0.4) (D) {\textbf{$b_{7}$}};
+		\node at (0.65,0.4) (D) {\textbf{$b_{7}$}};
+		\node at (1.4,0) (D) {\textbf{\textcolor{Blue}{$b_{4}$}}};
+		\node at (1.4,0) (D) {\textbf{\textcolor{Blue}{$b_{4}$}}};
+		\node at (0.65,-0.2) (D) {\textbf{$b_{6}$}};
+		\node at (0.65,-0.2) (D) {\textbf{$b_{6}$}};
+		\node at (0.65,1.3) (D) {\textbf{\textcolor{Blue}{$b_{1}$}}};
+		\node at (0.65,1.3) (D) {\textbf{\textcolor{Blue}{$b_{1}$}}};
+		\node at (0.2,0.6) (D) {\textbf{$b_{3}$}};
+		\node at (0.2,0.6) (D) {\textbf{$b_{3}$}};
+		\node at (1.1,0.6) (D) {\textbf{$b_{5}$}};
+		\node at (1.1,0.6) (D) {\textbf{$b_{5}$}};
+		\end{scope}
+		\end{tikzpicture}
+		\end{minipage}
+		\\
+	\end{tabular}
+			 
+	\centering\section{\textcolor{MaterialPurple}{Operaciones}}
+	\subsection{\textcolor{GoogleBlue}{Suma}}
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Suma BIN:}} Bit a Bit.
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Suma BCD:}} Suma de cada dígito de 4 bits, \bfseries{sumando 6} a cada resultado \bfseries{\color{GoogleRed}{> 9}}.
+	\end{itemize}
+			
+	\
+	\begin{tabular}{c c}
+				
+		\begin{minipage}[t][1.7cm][c]{2cm}
+		\centering\textcolor{MaterialPink}{\normalfont{\normalsize{\bfseries{BIN}}}}
+		\begin{equation*}
+		\begin{array}{B3}
+		\carryR 0 & \color{MaterialTeal}{ \carry 1\carry 1\carry 0\carry 0 } &\color{MaterialLightGreen}{ \carry 1\carry 0\carry 01} \\
+		{} + 0   
+		& \color{MaterialTeal}{1111} &\color{MaterialLightGreen}{1111}                      \\ \hline
+		\color{GoogleRed}{1}        
+		& \color{MaterialTeal}{1100} & \color{MaterialLightGreen}{1000}                      \\
+		\end{array}
+		\end{equation*}
+		\end{minipage}
+		& 
+		\begin{minipage}[t][2.5cm][c]{2cm}
+		\centering\textcolor{MaterialPink}{\normalfont{\normalsize{\bfseries{BCD}}}}
+		\begin{equation*}
+		\begin{array}{B4}
+		  & \color{MaterialTeal}{ \carry 0\carry 1\carry 0  \carryR  1 } &                         & \color{MaterialLightGreen}{ \carry 1\carry 0\carry 01} \\
+		{} +
+		  & \color{MaterialTeal}{0011}                                   &                         & \color{MaterialLightGreen}{0111}                       \\ \hline
+			       
+		  & \color{MaterialTeal}{1001}                                   & \color{GoogleRed}{ 1}   & \color{MaterialLightGreen}{0000}                       \\
+				 
+		  & {} +                                                         &                         & \color{GoogleGreen}{0110}                              \\ \hhline{~~--}
+		  & \color{MaterialTeal}{1001}                                   & \color{GoogleRed}{ (1)} & \color{MaterialLightGreen}{0110}                       \\
+		
+		\end{array}
+		\end{equation*}
+		\end{minipage}
+				
+	\end{tabular}
+		
+		
+	\columnbreak
+	\subsection{\textcolor{GoogleBlue}{Resta}}
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Resta BIN:}} Bit a Bit (0 - 1 = $\carry 1$).
+		\item[\textcolor{MaterialPink}{\textbullet}]  \justify{\textbf{\textcolor{MaterialPink}{Resta BCD:}} Resta de cada dígito de 4 bits, \bfseries{sumando 10} a cada resultado \bfseries{\color{GoogleRed}{negativo}} (tiene 5 bits).}
+	\end{itemize}
+		
+	\
+	\begin{tabular}{c c}
+				
+		\begin{minipage}[t][1.7cm][c]{2cm}
+		\centering\textcolor{MaterialPink}{\normalfont{\normalsize{\bfseries{BIN}}}}
+		\begin{equation*}
+		\begin{array}{B3}
+		& \color{MaterialTeal}{ \carry 1 0 \carry 1 \carry 0 } &\color{MaterialLightGreen}{ 0 1 \carry 1 0} \\
+		{} -    
+		& \color{MaterialTeal}{0101} &\color{MaterialLightGreen}{1101}                      \\ \hline       
+		& \color{MaterialTeal}{0100} & \color{MaterialLightGreen}{1001}                      \\
+		\end{array}
+		\end{equation*}
+		\end{minipage}
+		& 
+		\begin{minipage}[t][2.5cm][c]{2cm}
+		\centering\textcolor{MaterialPink}{\normalfont{\normalsize{\bfseries{BCD}}}}
+		\begin{equation*}
+		\begin{array}{B4}
+		  & \color{MaterialTeal}{ \carry 1 \carry 0 \carry 0  \carryR  0 } &                                     & \color{MaterialLightGreen}{ 0 1 \carry 1 0} \\
+		{} -
+		  & \color{MaterialTeal}{0101}                                     &                                     & \color{MaterialLightGreen}{1001}            \\ \hline
+			       
+		  & \color{MaterialTeal}{0010}                                     & \color{GoogleRed}{ \text{\sout{1}}} & \color{MaterialLightGreen}{1101}            \\
+				 
+		  & {} +                                                           &                                     & \color{GoogleGreen}{1010}                   \\ \hhline{~~--}
+		  & \color{MaterialTeal}{0010}                                     & \color{GoogleRed}{ (1)}             & \color{MaterialLightGreen}{0111}            \\
+		
+		\end{array}
+		\end{equation*}
+		\end{minipage}
+				
+	\end{tabular}	
+		
+	\subsection{\textcolor{GoogleBlue}{Multiplicación}}
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Multiplicación BIN:}} Bit a Bit.
+		\item[\textcolor{MaterialPink}{\textbullet}] \justify{ \textbf{\textcolor{MaterialPink}{Multiplicación BCD:}} Utiliza el equivalente decimal de cada dígito de 4 bits, \bfseries{multiplicando normal}, \bfseries{\color{GoogleRed}{NO recomendable}}.}
+	\end{itemize}
+		
+	\
+	\begin{tabular}{c c}
+				
+		\begin{minipage}[t][2.5cm][c]{2cm}
+		\centering\textcolor{MaterialPink}{\normalfont{\normalsize{\bfseries{BIN}}}}
+		\begin{equation*}
+		\begin{array}{B2}
+		                          & 1101                                            \\
+		\times                    & \color{MaterialTeal}{1}\color{MaterialGreen}{0} \\ \hline       
+		                          & \color{MaterialGreen}{0000}                     
+		\\
+		+ \color{MaterialTeal}{1} & \color{MaterialTeal}{101}\color{White}{0}       
+		\\\hline 
+		1                         & 1010                                            
+		\end{array}
+		\end{equation*}
+		\end{minipage}
+		                          &                                                 
+				
+	\end{tabular}	
+		
+	\subsection{\textcolor{GoogleBlue}{División}}
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{División BIN:}} Bit a Bit.
+		\item[\textcolor{MaterialPink}{\textbullet}] \justify{ \textbf{\textcolor{MaterialPink}{División BCD:}} Utiliza el equivalente decimal de cada dígito de 4 bits, \bfseries{dividiendo normal}, \bfseries{\color{GoogleRed}{NO recomendable}}.}
+	\end{itemize}
+		
+	\centering\section{\textcolor{MaterialPurple}{Representación Números Positivos y Negativos}}
+	
+			
+	\begin{tabular}{| c | c | c | c |}
+				    		
+		\hline
+		\rowcolor{MaterialPurple} &  & \multicolumn{2}{c|}{\bfseries{\textcolor{white}{Complementos}}}
+		\\
+		\hhline{|>{\arrayrulecolor{MaterialPurple}}->{\arrayrulecolor{Black}}|>{\arrayrulecolor{MaterialPurple}}->{\arrayrulecolor{Black}}|>{\arrayrulecolor{Black}}->{\arrayrulecolor{Black}}-}
+				  				
+		\rowcolor{MaterialPurple}\multirow{-2}{*}{\bfseries{\textcolor{white}{\bfseries{Decimal}}}} & \multirow{-2}{*}{\bfseries{\textcolor{white}{\bfseries{Signo y Magnitud}}}} & \textcolor{white}{\bfseries{a 1}}                                                                                                                                                                                                  & \textcolor{white}{\bfseries{a 2}}                                                                                                                                                                                                  
+				
+		\\
+		\hline
+		\rowcolor{MaterialPurple!10}\bfseries{76}                                                   & \textcolor{MaterialIndigo}{0}1001100                                        & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0} & \textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0} 
+		\\
+		\rowcolor{MaterialPurple!20}\bfseries{\textcolor{GoogleRed}{-}76}                                                    & 
+		\textcolor{MaterialPink}{1}1001100   & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}       & \textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialPink}{1}\textcolor{MaterialIndigo}{0}\textcolor{MaterialIndigo}{0}   
+		\\
+		\hline
+				  		
+	\end{tabular}
+		
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Complemento a 1 $\rightarrow$}} \textcolor{GoogleRed}{-}1 a cada bit			\item[\textcolor{MaterialIndigo}{\textbullet}]  \textbf{\textcolor{MaterialIndigo}{Complemento a 2 $\rightarrow$}} \textcolor{GoogleRed}{-}1 a cada bit \textcolor{GoogleGreen}{+} 1
+		       			
+	\end{itemize}
+		
+		
+\end{multicols}
+\pagebreak
+\end{document}

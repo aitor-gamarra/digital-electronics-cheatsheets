@@ -1,0 +1,526 @@
+\documentclass[11pt,english,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage[landscape]{geometry}
+\usepackage{color,graphicx,overpic}
+\usepackage { amsmath , amssymb , amsthm }
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{amsfonts}
+\usepackage{array,booktabs}
+\usepackage{textcomp}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{environ}
+\usepackage{xcolor-material}
+\usepackage{circuitikz}
+\usepackage{hhline}
+\usetikzlibrary{arrows, shapes.gates.logic.US, calc}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\ctikzset{bipoles/length=.8cm}
+\tikzset{baseline={([yshift=-.6ex]current bounding box.center)}}
+\geometry{top=-0.5cm,left=1cm,right=1cm,bottom=1cm}
+\usepackage[table]{xcolor}
+\pagestyle{empty} % Turn off header and footer
+\usepackage{karnaugh-map}
+
+
+% \renewcommand\rmdefault{phv} % Arial
+% \renewcommand\sfdefault{phv} % Arial
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%x
+  {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+  {-1explus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+  {\normalfont\small\bfseries}}
+\makeatother
+
+\setcounter{secnumdepth}{0} % Don't print section numbers
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+\definecolor{KarRed}{rgb}{1,0.73,0.749}
+\definecolor{KarGreen}{rgb}{0.678,1,0.725}
+
+
+\begin{document}
+
+\raggedright\
+
+\begin{center}
+	\Large{\textbf{\textcolor{GoogleRed}{\textsc{Flip-Flops}}}}
+\end{center}
+
+\footnotesize
+\begin{multicols}{3}
+
+	\centering\section{\textcolor{MaterialPurple}{RS}}
+
+	\subsection{\textcolor{GoogleBlue}{Básculas RS}}
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Puertas NOR:}}
+
+		      \begin{tabular}{l l l}
+			      \begin{circuitikz}
+				      \ctikzset{american or shape=roundy}
+				      \draw
+				      (1,2) node[nor port] (NOR1) {}
+				      (2,2) node[anchor=east] (Q) {Q}
+				      (2,0) node[anchor=east] (Qneg) {$\overline{Q}$}
+				      (1,0) node[nor port] (NOR2) {}
+				      (0,2.16) node[anchor=east] (R) {R}
+				      (0,-0.16) node[anchor=east] (S) {S}
+				      (NOR1.out) -- ++(0,-0.5) -- ($(NOR2.in 1) +(0,0.5)$) -- (NOR2.in 1)
+				      (NOR2.out) -- ++(0,+0.5) -- ($(NOR1.in 2) +(0,-0.5)$)--(NOR1.in 2)
+
+				      (NOR1.out) -- (Q)
+				      (NOR2.out) -- (Qneg)
+				      (NOR1.in 1) -- (R)
+				      (NOR2.in 2) -- (S)
+
+				      ;\end{circuitikz}
+			        &
+			      \begin{circuitikz} \draw
+				      (0,2) node[flipflop SR, dot on notQ,flipflop def={t4=\ctikztextnot{Q}}] (SR) {}
+				      ;\end{circuitikz}
+			        &
+			      \begin{tabular}{|c c || c c |}
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{R}}   & \textcolor{white}{\bfseries{S}} & \textcolor{white}{\bfseries{$Q_{t+1}$}} & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 } & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 } & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialPink}{1 }            & \textcolor{MaterialIndigo}{0 }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialIndigo}{0 }          & \textcolor{MaterialPink}{1 }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialIndigo}{0 }          & \textcolor{MaterialIndigo}{0 }
+				      \\
+				      \hhline{--||--}
+			      \end{tabular}
+
+
+			      \\ \\
+		      \end{tabular}
+
+
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Puertas NAND:}}
+
+		      \begin{tabular}{l l l}
+			      \begin{circuitikz}
+				      \ctikzset{american or shape=roundy}
+				      \draw
+				      (1,2) node[nand port] (NOR1) {}
+				      (2,2) node[anchor=east] (Q) {Q}
+				      (2,0) node[anchor=east] (Qneg) {$\overline{Q}$}
+				      (1,0) node[nand port] (NOR2) {}
+				      (0,2.16) node[anchor=east] (R) {$\overline{S}$}
+				      (0,-0.16) node[anchor=east] (S) {$\overline{R}$}
+				      (NOR1.out) -- ++(0,-0.5) -- ($(NOR2.in 1) +(0,0.5)$) -- (NOR2.in 1)
+				      (NOR2.out) -- ++(0,+0.5) -- ($(NOR1.in 2) +(0,-0.5)$)--(NOR1.in 2)
+
+				      (NOR1.out) -- (Q)
+				      (NOR2.out) -- (Qneg)
+				      (NOR1.in 1) -- (R)
+				      (NOR2.in 2) -- (S)
+
+				      ;\end{circuitikz}
+			        &
+			      \begin{circuitikz} \draw
+				      (0,2) node[flipflop SR, dot on notQ,flipflop def={n1=1, n3= 1, t1=\ctikztextnot{S}, t3=\ctikztextnot{R}, t4=\ctikztextnot{Q}}] (SR) {}
+				      ;\end{circuitikz}
+			        &
+			      \begin{tabular}{|c c || c c |}
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{$\overline{R}$}} & \textcolor{white}{\bfseries{$\overline{S}$}} & \textcolor{white}{\bfseries{$Q_{t+1}$}} & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 }            & \textcolor{MaterialIndigo}{0 }               & \textcolor{MaterialPink}{1 }            & \textcolor{MaterialPink}{1 }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 }            & \textcolor{MaterialPink}{1 }                 & \textcolor{MaterialIndigo}{0 }          & \textcolor{MaterialPink}{1 }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }              & \textcolor{MaterialIndigo}{0 }               & \textcolor{MaterialPink}{1 }            & \textcolor{MaterialIndigo}{0 }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }              & \textcolor{MaterialPink}{1 }                 & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+				      \\
+				      \hhline{--||--}
+			      \end{tabular}
+
+
+			      \\ \\
+		      \end{tabular}
+
+	\end{itemize}
+
+	\subsection{\textcolor{GoogleBlue}{Flip-Flops RS}}
+
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Síncrono:}}
+
+		      \begin{tabular}{p{0.1\textwidth} p{0.1\textwidth}}
+
+			      \begin{circuitikz}[scale=1.5, transform shape] \draw
+				      (0,2) node[flipflop SR, dot on notQ, flipflop def={t2=CLK, t4=\ctikztextnot{Q}, font=\tiny}] (SR) {}
+				      ;\end{circuitikz}
+			        &
+			      \begin{tabular}{|c c c || c c |}
+				      \hhline{---||--}
+				      \rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{CLK}} & \textcolor{white}{\bfseries{R}} & \textcolor{white}{\bfseries{S}} & \textcolor{white}{\bfseries{$Q_{t+1}$}} & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}
+				      \\
+				      \hhline{---||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 } & \textcolor{black}{X }           & \textcolor{black}{X }           & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+				      \\
+				      \hhline{---||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+				      \\
+				      \hhline{---||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialPink}{1 }            & \textcolor{MaterialIndigo}{0 }
+				      \\
+				      \hhline{---||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialIndigo}{0 }          & \textcolor{MaterialPink}{1 }
+				      \\
+				      \hhline{---||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialIndigo}{0 }          & \textcolor{MaterialIndigo}{0 }
+				      \\
+				      \hhline{---||--}
+			      \end{tabular}
+
+
+			      \\ \\
+		      \end{tabular}
+
+
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Síncrono con entradas \textsc{async}:}}
+
+		      \begin{tabular}{p{0.07\textwidth} c}
+
+			      \begin{circuitikz}[scale=1.5, transform shape] \draw
+				      (0,2) node[flipflop SR, add async SR, dot on notQ, flipflop def={tu=\ctikztextnot{PRE}, td=\ctikztextnot{CLR}, ,t2=CLK, t4=\ctikztextnot{Q}, font=\tiny, nu=1, nd=1}] (SR) {}
+				      ;\end{circuitikz}
+			        &
+			      \begin{tabular}{| c c c c c || c c | c|}
+				      \hhline{-----||--}
+				      \rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{$\overline{PRE}$}} & \textcolor{white}{\bfseries{$\overline{CLR}$}} & \textcolor{white}{\bfseries{CLK}} & \textcolor{white}{\bfseries{R}} & \textcolor{white}{\bfseries{S}} & \textcolor{white}{\bfseries{$Q_{t+1}$}} & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}  & \multicolumn{1}{c}{\cellcolor{white} }
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0}              & \textcolor{MaterialIndigo}{0}                  & X                                 & X                               & X                               & \textcolor{MaterialIndigo}{0}           & \textcolor{MaterialIndigo}{0}                       & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{No usado}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0}              & \textcolor{MaterialPink}{1}                    & X                                 & X                               & X                               & \textcolor{MaterialPink}{1}             & \textcolor{MaterialIndigo}{0}                       & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{Set \textsc{async}}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialIndigo}{0}                  & X                                 & X                               & X                               & \textcolor{MaterialIndigo}{0}           & \textcolor{MaterialPink}{1}                         & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{Reset \textsc{async}}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{MaterialIndigo}{0}     & X                               & X                               & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ } & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{Mantiene}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ } & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{Mantiene}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{MaterialPink}{1}       & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}             & \textcolor{MaterialIndigo}{0}                       & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{Set \textsc{sync}}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{MaterialPink}{1}       & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}           & \textcolor{MaterialPink}{1}                         & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{Reset \textsc{sync}}}}
+				      \\
+				      \hhline{-----||--|-}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{MaterialPink}{1}       & \textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}           & \textcolor{MaterialIndigo}{0}                       & \cellcolor{MaterialBlueGrey}{\textcolor{white}{\bfseries{No usado}}}
+				      \\
+				      \hhline{-----||--|-}
+			      \end{tabular}
+
+
+			      \\ \\
+		      \end{tabular}
+	\end{itemize}
+
+
+	\columnbreak
+
+	\centering\section{\textcolor{MaterialPurple}{Tipo D}}
+
+
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Disparado por Nivel:}}
+
+		      \begin{tabular}{p{0.1\textwidth} p{0.1\textwidth}}
+
+			      \begin{circuitikz}[scale=1.5, transform shape] \draw
+				      (0,2) node[flipflop D, dot on notQ, flipflop def={t3=CLK, t4=\ctikztextnot{Q}, c3=0, font=\tiny}] (D) {}
+				      ;\end{circuitikz}
+			        &
+			      \begin{tabular}{| c c || c c |}
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{CLK}} & \textcolor{white}{\bfseries{D}} & \textcolor{white}{\bfseries{$Q_{t+1}$}} & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 } & \textcolor{black}{X }           & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialPink}{1 }            & \textcolor{MaterialIndigo}{0 }
+				      \\
+				      \hhline{--||--}
+				      \rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }   & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialIndigo}{0 }          & \textcolor{MaterialPink}{1 }
+				      \\
+				      \hhline{--||--}
+			      \end{tabular}
+
+
+			      \\ \\
+		      \end{tabular}
+
+
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Disparado por Flanco:}}
+
+		      \begin{tabular}{p{0.07\textwidth} c}
+
+			      \begin{circuitikz}[scale=1.5, transform shape] \draw
+				      (0,2) node[flipflop D, dot on notQ, flipflop def={tu=\ctikztextnot{PRE}, td=\ctikztextnot{CLR}, t4=\ctikztextnot{Q}, font=\tiny, nu=1, nd=1}] (SR) {}
+				      ;\end{circuitikz}
+			        &
+			      \begin{tabular}{|c c c c || c c |}
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{$\overline{PRE}$}} & \textcolor{white}{\bfseries{$\overline{CLR}$}} & \textcolor{white}{\bfseries{CLK}} & \textcolor{white}{\bfseries{D}} & \textcolor{white}{\bfseries{$Q_{t+1}$}} & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}
+				      \\
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0} & \textcolor{MaterialIndigo}{0} & X & X & \multicolumn{2}{c|}{No usado}
+				      \\
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0}              & \textcolor{MaterialPink}{1}                    & X                                 & X                               & \textcolor{MaterialPink}{1}             & \textcolor{MaterialIndigo}{0}
+				      \\
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialIndigo}{0}                  & X                                 & X                               & \textcolor{MaterialIndigo}{0}           & \textcolor{MaterialPink}{1}
+				      \\
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{MaterialIndigo}{0}     & X                               & \textcolor{MaterialGreen}{$Q_{t}$ }     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+				      \\
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{Cyan}{$\uparrow$}      & \textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}             & \textcolor{MaterialIndigo}{0}
+				      \\
+				      \hhline{----||--}
+				      \rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}                & \textcolor{MaterialPink}{1}                    & \textcolor{Cyan}{$\uparrow$}      & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}           & \textcolor{MaterialPink}{1}
+				      \\
+				      \hhline{----||--}
+			      \end{tabular}
+
+			      \\ \\
+		      \end{tabular}
+	\end{itemize}
+
+	\centering\section{\textcolor{MaterialPurple}{Tipo T}}
+
+	\begin{tabular}{p{0.07\textwidth} c}
+
+		\begin{circuitikz}[scale=1.5, transform shape] \draw
+			(0,2) node[flipflop T, dot on notQ, flipflop def={tu=\ctikztextnot{PRE}, td=\ctikztextnot{CLR}, t4=\ctikztextnot{Q}, font=\tiny, nu=1, nd=1}] (SR) {}
+			;\end{circuitikz}
+		  &
+		\begin{tabular}{| c c || c c |}
+			\hhline{--||--}
+			\rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{CLK}} & \textcolor{white}{\bfseries{T}} & \textcolor{white}{\bfseries{$Q_{t+1}$}}             & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}}
+			\\
+			\hhline{--||--}
+			\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 } & \textcolor{black}{X }           & \textcolor{MaterialGreen}{$Q_{t}$ }                 & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+			\\
+			\hhline{--||--}
+			\rowcolor{MaterialBlueGrey!20} \textcolor{Cyan}{$\uparrow$}  & \textcolor{MaterialIndigo}{0 }  & \textcolor{MaterialGreen}{$Q_{t}$ }                 & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ }
+			\\
+			\hhline{--||--}
+			\rowcolor{MaterialBlueGrey!20}\textcolor{Cyan}{$\uparrow$}   & \textcolor{MaterialPink}{1 }    & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$ } & \textcolor{MaterialGreen}{$Q_{t}$ }
+			\\
+			\hhline{--||--}
+		\end{tabular}
+	\end{tabular}
+	\
+	\newline
+	\newline
+	\newline
+	\newline
+	\newline
+
+	\begin{tabular}{p{0.12\textwidth} p{0.2\textwidth}}
+
+		  &
+		\textit{Para que un conjunto de FF...}
+		\begin{itemize}
+
+			\item[\textcolor{MaterialIndigo}{\textbullet}] \textbf{\textcolor{MaterialIndigo}{Empiecen en 0:}} CLR
+			\item[\textcolor{MaterialPink}{\textbullet}]
+			      \textbf{\textcolor{MaterialPink}{Empiecen en 1:}} PRE
+			\item[\textcolor{MaterialPink}{\textbullet}]
+			      \textbf{\textcolor{MaterialPink}{Empiecen en }\textcolor{MaterialIndigo}{valor concreto:}}
+
+			      \begin{itemize}
+				      \item[\textcolor{MaterialIndigo}{\textbullet}] \textcolor{MaterialIndigo}{CLR} para los \textcolor{MaterialIndigo}{0}
+				      \item[\textcolor{MaterialPink}{\textbullet}] \textcolor{MaterialPink}{PRE} para los \textcolor{MaterialPink}{1}
+
+
+			      \end{itemize}
+		\end{itemize}
+	\end{tabular}
+	\newline
+	\newline
+
+
+	\columnbreak
+
+	\centering\section{\textcolor{MaterialPurple}{Tipo JK}}
+
+	\begin{tabular}{p{0.07\textwidth} c}
+
+		\begin{circuitikz}[scale=1.5, transform shape] \draw
+			(0,2) node[flipflop JK, dot on notQ, flipflop def={ t4=\ctikztextnot{Q}, c3=0, font=\tiny}] (D) {}
+			;\end{circuitikz}
+		  &
+		\begin{tabular}{|c c c || c c c |}
+			\hhline{---||---}
+			\rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{CLK}} & \textcolor{white}{\bfseries{J}} & \textcolor{white}{\bfseries{K}} & \textcolor{white}{\bfseries{$Q_{t+1}$}}            & \textcolor{white}{\bfseries{$\overline{Q}_{t+1}$}} & \textcolor{white}{\bfseries{Función}}
+			\\
+			\hhline{---||---}
+			\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0} & X                               & X                               & \textcolor{MaterialGreen}{$Q_{t}$}                 & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$} & No cambia
+			\\
+			\hhline{---||---}
+			\rowcolor{MaterialBlueGrey!20} \textcolor{Cyan}{$\uparrow$}  & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialGreen}{$Q_{t}$}                 & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$} & No cambia
+			\\
+			\hhline{---||---}
+			\rowcolor{MaterialBlueGrey!20} \textcolor{Cyan}{$\uparrow$}  & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}                      & \textcolor{MaterialPink}{1}                        & A 0: Reset
+			\\
+			\hhline{---||---}
+			\rowcolor{MaterialBlueGrey!20} \textcolor{Cyan}{$\uparrow$}  & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}                        & \textcolor{MaterialIndigo}{0}                      & A 1: Set
+			\\
+			\hhline{---||---}
+			\rowcolor{MaterialBlueGrey!20} \textcolor{Cyan}{$\uparrow$}  & \textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}     & \textcolor{MaterialDeepOrange}{$\overline{Q}_{t}$} & \textcolor{MaterialGreen}{$Q_{t}$}                 & Conmuta
+			\\
+			\hhline{---||---}
+		\end{tabular}
+	\end{tabular}
+
+	\
+
+	\subsection{\textcolor{GoogleBlue}{D por flanco con JK}}
+
+	\begin{circuitikz}[scale=1.2, transform shape]
+		\draw
+		(3.5,1) node[flipflop JK, dot on notQ, flipflop def={ t4=\ctikztextnot{Q}, c3=0, font=\footnotesize}] (JK) {}
+		($(JK.pin 3)-(1,0)$) node[not port] (NOT) {}
+
+		($(JK.pin 1)-(2.5,0)$) node[anchor=east] (D) {D}
+		($(JK.pin 2)-(2.5,0)$) node[anchor=east] (CLK) {CLK}
+		($(JK.pin 1)-(1.8,0)$) node[anchor=south] (Punto) {}
+		($(JK.pin 6)+(1,0)$) node[anchor=west] (Q) {Q}
+		($(JK.pin 4)+(1,0)$) node[anchor=west] (Qneg) {\ctikztextnot{Q}}
+
+		(NOT.out) -- (JK.pin 3)
+		(D) -- (JK.pin 1)
+		(CLK) -- (JK.pin 2)
+		(JK.pin 6) -- (Q)
+		(JK.pin 4) -- (Qneg)
+		(Punto.south) to[short, *-] ($(JK.pin 3)-(1.8,0)$) -- (NOT.in)
+
+		node[draw, dashed, minimum width=3.8cm,minimum height=2.2cm,anchor=south west] at (0.7,-0.15){}
+		;\end{circuitikz}
+
+
+	\subsection{\textcolor{GoogleBlue}{T por flanco con JK}}
+
+	\begin{circuitikz}[scale=1.2, transform shape]
+		\draw
+		(2.5,1) node[flipflop JK, dot on notQ, flipflop def={ t4=\ctikztextnot{Q}, font=\footnotesize}] (JK) {}
+
+		($(JK.pin 1)-(1,0)$) node[anchor=east] (D) {T}
+		($(JK.pin 2)-(1,0)$) node[anchor=east] (CLK) {CLK}
+		($(JK.pin 1)-(0.6,0)$) node[anchor=south] (Punto) {}
+		($(JK.pin 6)+(1,0)$) node[anchor=west] (Q) {Q}
+		($(JK.pin 4)+(1,0)$) node[anchor=west] (Qneg) {\ctikztextnot{Q}}
+
+		(D) -- (JK.pin 1)
+		(CLK) -- (JK.pin 2)
+		(JK.pin 6) -- (Q)
+		(JK.pin 4) -- (Qneg)
+		(Punto.south) to[short, *-] ($(JK.pin 3)-(0.6,0)$) -- (JK.pin 3)
+
+		node[draw, dashed, minimum width=2.5cm,minimum height=2.2cm,anchor=south west] at (1,-0.15){}
+		;\end{circuitikz}
+
+	\
+	\centering\section{\textcolor{MaterialPurple}{Procedimiento Nuevos Flip-Flop}}
+	\subsection{\textcolor{GoogleBlue}{Ejemplo JK con T}}
+	\
+	\textcolor{MaterialPink}{1.} Conocer tabla de verdad de AMBOS flip-flop
+	\
+	\newline
+
+	\mbox{\textcolor{MaterialPink}{2.} Nueva tabla de verdad: $\begin{cases} \textcolor{MaterialTeal}{IN:}$ IN FF want (J, K), OUT FF have (Q)$ \\	\textcolor{MaterialGreen}{OUT:}$ IN FF have (T)$ \end{cases}$}
+	\
+	\newline
+
+	\textcolor{MaterialPink}{3.} Con tabla de \textcolor{MaterialPink}{1.}, completar tabla:
+	\
+	\newline
+
+	\begin{tabular}{|c c c || c |}
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{J}}   & \textcolor{white}{\bfseries{K}} & \textcolor{white}{\bfseries{Q}} & \textcolor{white}{\bfseries{T}}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0} & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0} & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0} & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialIndigo}{0} & \textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}     & \textcolor{MaterialPink}{1}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}   & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}   & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}   & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}
+		\\
+		\hhline{---||-}
+		\rowcolor{MaterialBlueGrey!20} \textcolor{MaterialPink}{1}   & \textcolor{MaterialPink}{1}     & \textcolor{MaterialIndigo}{0}   & \textcolor{MaterialPink}{1}
+		\\
+		\hhline{---||-}
+	\end{tabular}
+
+	\
+	\newline
+
+	\textcolor{MaterialPink}{4.} Karnaugh:
+	$T = KQ + K\bar{Q}$
+
+\end{multicols}
+%\pagebreak
+%\input{tema2}
+\end{document}

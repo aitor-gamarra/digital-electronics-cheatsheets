@@ -1,0 +1,501 @@
+\documentclass[11pt,english,landscape]{article}
+\usepackage{multicol}
+\usepackage{calc}
+\usepackage[landscape]{geometry}
+\usepackage{color,graphicx,overpic}
+\usepackage { amsmath , amssymb , amsthm }
+\usepackage[T1]{fontenc}
+\usepackage[bitstream-charter]{mathdesign}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{amsfonts}
+\usepackage{array,booktabs}
+\usepackage{textcomp}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usepackage{environ}
+\usepackage{xcolor-material}
+\usepackage{circuitikz}
+\usepackage{hhline}
+\usetikzlibrary{arrows, shapes.gates.logic.US, calc}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+\ctikzset{bipoles/length=.8cm}
+\tikzset{baseline={([yshift=-.6ex]current bounding box.center)}}
+\geometry{top=-0.5cm,left=1cm,right=1cm,bottom=1cm}
+\usepackage[table]{xcolor}
+\pagestyle{empty} % Turn off header and footer
+\usepackage{karnaugh-map}
+
+% \renewcommand\rmdefault{phv} % Arial
+% \renewcommand\sfdefault{phv} % Arial
+
+% Redefine section commands to use less space
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%x
+  {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+  {-1explus -.5ex minus -.2ex}%
+  {0.5ex plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+  {-1ex plus -.5ex minus -.2ex}%
+  {1ex plus .2ex}%
+  {\normalfont\small\bfseries}}
+\makeatother
+
+\setcounter{secnumdepth}{0} % Don't print section numbers
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+
+\definecolor{KarRed}{rgb}{1,0.73,0.749}
+\definecolor{KarGreen}{rgb}{0.678,1,0.725}
+
+
+\begin{document}
+
+\raggedright\
+
+\begin{center}
+  \Large{\textbf{\textcolor{GoogleRed}{\textsc{Tema 1: Álgebra de Variables Lógicas}}}}
+\end{center}
+
+\footnotesize
+\begin{multicols}{3}
+
+ 	\centering\section{\textcolor{MaterialPurple}{Algebra Booleana}}
+ 	
+  	\subsection{\textcolor{GoogleBlue}{Básicos}}
+	\begin{itemize}
+		\item[\textcolor{MaterialPink}{\textbullet}] \textbf{\textcolor{MaterialPink}{Elemento Neutro:}}
+			\subitem \textbullet \hspace{5pt} \textbf{+} $\rightarrow$ 0
+			\subitem \textbullet \hspace{5pt} \textbf{$\cdot$} $\rightarrow$ 1
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Propiedad Distributiva:}}
+			\subitem \textbullet  \hspace{5pt} $a + (b \cdot c)=(a+b) \cdot (a + c)$
+			\subitem \textbullet  \hspace{5pt} $a \cdot (b + c)=(a \cdot b) + (a \cdot c)$
+		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Complemento $\rightarrow$} \=a}
+			\subitem \textbullet  \hspace{5pt} $a + \bar{a} = 1$
+			\subitem \textbullet  \hspace{5pt} $a \cdot \bar{a} = 0$
+	\end{itemize}
+
+  	\subsection{\textcolor{GoogleBlue}{Teoremas}}
+  
+  	\begin{tabular}{l l}
+  		 \textbf{\textcolor{MaterialPink}{1.}} $\begin{cases} a + a = a \\	a \cdot a = a \end{cases}$ & \textbf{\textcolor{MaterialPink}{2.}} $\begin{cases}a + \textcolor{MaterialPink}{1 }= \textcolor{MaterialPink}{1 }\\	a \cdot \textcolor{MaterialIndigo}{0 }= \textcolor{MaterialIndigo}{0}\end{cases}$ \\ \\
+  		 \textbf{\textcolor{MaterialPink}{3.}} $a = \bar{\bar{a}}$ & \textbf{\textcolor{MaterialPink}{4.}} $\begin{cases}a + ab = a \\	a(a+b) = a\end{cases}$ \\ \\
+  		 \textbf{\textcolor{MaterialPink}{5.}} $\begin{cases} a+(b+c) = (a+b)+c\\a(bc) = (ab)c\end{cases}$ & \textbf{\textcolor{MaterialPink}{6.}} $\begin{cases}\overline{(a+b)} = \bar{a}\cdot\bar{b} \\	\overline{a \cdot b} = \bar{a}+\bar{b}\end{cases}$ 	 \\ \\
+  	\end{tabular}
+  	\begin{flushleft}
+  		\hspace{20pt}\bfseries{\textcolor{MaterialIndigo}{Conclusiones}}
+  	\end{flushleft}
+
+	\begin{itemize}
+		\item[\textcolor{MaterialLightBlue}{\textbullet}] \textcolor{MaterialLightBlue}{\textbf{\scshape{De Morgan (\textcolor{MaterialPink}{6})}}$\rightarrow$} $\begin{cases}\overline{ab} \neq \bar{a}\cdot\bar{b} \\	\overline{a + b} \neq \bar{a}+\bar{b}\end{cases}$ 	 
+		\item[\textcolor{MaterialLightBlue}{\textbullet}] \textcolor{MaterialLightBlue}{\textbf{\scshape{Shannon}}$\rightarrow$}$ \overline{f(a,b,\cdots,n,+,\cdot)} =f(\bar{a},\bar{b},\cdots,\bar{n},\cdot,+)$
+	\end{itemize}
+
+  	\subsection{\textcolor{GoogleBlue}{Término \scshape{Canónico}}}
+  	\begin{itemize}
+  		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{\underline{Producto} canónico $\rightarrow$ }}\textcolor{MaterialTeal}{\small\scshape{minterm} = 1}
+  			\subitem \begin{equation*}\left.\begin{aligned}\textcolor{MaterialGrey}{000\rightarrow \bar{a}\bar{b}\bar{c}}\\ \textcolor{MaterialGrey}{010 \rightarrow \bar{a}b\bar{c}}\end{aligned}\color{MaterialGrey}\right\} \textcolor{MaterialGrey}{ \Longrightarrow }z=f(a,b,c)=\Sigma(Los \cdot Que Dan 1)\end{equation*}
+  		\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{\underline{Suma} canónica $\rightarrow$ }}\textcolor{MaterialGreen}{\large\scshape{maxterm} = 0}
+  			\subitem \begin{equation*}\left.\begin{aligned}\textcolor{MaterialGrey}{ 000 \rightarrow a+b+c}\\\textcolor{MaterialGrey}{ 010 \rightarrow a+\bar{b}+c}\end{aligned}\color{MaterialGrey}\right\} \textcolor{MaterialGrey}{ \Longrightarrow} z=f(a,b,c)=\Pi(Los + Que Dan 0)\end{equation*}
+  	\end{itemize}
+
+  \columnbreak
+
+\centering\section{\textcolor{MaterialPurple}{Puertas Lógicas}}
+ 
+  \subsection{\textcolor{GoogleBlue}{Generales}}
+	\begin{tabular}{ |c|c|c|c c |c| }
+		\hline
+		\rowcolor{GoogleBlue}\textcolor{white}{\bfseries{Puerta}} & \textcolor{white}{\bfseries{fun./n}} & \textcolor{white}{\bfseries{USA/EU}} & 			\textcolor{white}{\bfseries{a}} & \textcolor{white}{\bfseries{b}} & \textcolor{white}{\bfseries{z}} \\
+		\hline
+			%----------AND----------
+ 			%Fila 1
+		 	\rowcolor{MaterialLightBlue50} & & & \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }\\
+ 			%Fila 2
+ 			\rowcolor{MaterialLightBlue50}&
+ 			\multirow{-2}{*}{$z=a \cdot b$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american and port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialLightBlue50}& & & \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 } \\
+ 			%Fila 4
+ 				\rowcolor{MaterialLightBlue50}\multirow{-4}{*}{\bfseries{AND}} 
+ 				& 
+ 				\multirow{-2}{*}{7408} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european and port]{}; \end{circuitikz}} 
+ 				&
+ 				\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 } \\
+ 			\hline
+			%----------NAND----------
+ 			%Fila 1
+		 	\rowcolor{MaterialRed50} & & & \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 } \\
+ 			%Fila 2
+ 			\rowcolor{MaterialRed50}&
+ 			\multirow{-2}{*}{$z=\overline{a \cdot b}$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american nand port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialRed50}& & & \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 } \\
+ 			%Fila 4
+ 				\rowcolor{MaterialRed50}\multirow{-4}{*}{\bfseries{NAND}} 
+ 				& 
+ 				\multirow{-2}{*}{7400} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european nand port]{}; \end{circuitikz}} 
+ 				&\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 } \\
+ 			\hline
+			%----------OR----------
+ 			%Fila \textcolor{MaterialPink}{1 }
+		 	\rowcolor{MaterialLightBlue100} & & & \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }\\
+ 			%Fila 2
+ 			\rowcolor{MaterialLightBlue100}&
+ 			\multirow{-2}{*}{$z=a + b$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american or port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialLightBlue100}& & & \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }\\
+ 			%Fila 4
+ 				\rowcolor{MaterialLightBlue100}\multirow{-4}{*}{\bfseries{OR}} 
+ 				& 
+ 				\multirow{-2}{*}{7432} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european or port]{}; \end{circuitikz}} 
+ 				&\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }\\
+ 			\hline
+			%----------NOR----------
+ 			%Fila \textcolor{MaterialPink}{1 }
+		 	\rowcolor{MaterialRed100} & & & \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }\\
+ 			%Fila 2
+ 			\rowcolor{MaterialRed100}&
+ 			\multirow{-2}{*}{$z=\overline{a + b}$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american nor port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialRed100}& & & \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }\\
+ 			%Fila 4
+ 				\rowcolor{MaterialRed100}\multirow{-4}{*}{\bfseries{NOR}} 
+ 				& 
+ 				\multirow{-2}{*}{7402} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european nor port]{}; \end{circuitikz}} 
+ 				&
+ 				\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 } \\
+ 			\hline
+			%----------NOT----------
+ 			%Fila 1
+		 	\rowcolor{MaterialRedA100} & & & & &\\
+ 			%Fila 2
+ 			\rowcolor{MaterialRedA100}&
+ 			\multirow{-2}{*}{$z=\bar a$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american not port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 } & & \textcolor{MaterialPink}{1 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialRedA100}& & & \textcolor{MaterialPink}{1 } & & \textcolor{MaterialIndigo}{0 }\\
+ 			%Fila 4
+ 				\rowcolor{MaterialRedA100}\multirow{-4}{*}{\bfseries{NOT}} 
+ 				& 
+ 				\multirow{-2}{*}{7404} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european not port]{}; \end{circuitikz}} 
+ 				& & &\\
+ 			\hline
+	
+	\end{tabular}
+
+\subsection{\textcolor{GoogleBlue}{Conversiones}}
+
+
+\begin{tabular}{ |c|c| }
+		\hline
+			%----------XOR----------
+ 			%Fila 1
+		 	\cellcolor{GoogleBlue} \textcolor{white}{\bfseries{AND}} & \cellcolor{GoogleBlue!30}\\
+		 	\cellcolor{GoogleBlue} \textcolor{white}{$z = a \cdot b$} & \cellcolor{GoogleBlue!30}\multirow{-2}{*}{$z=\overline{\overline{a \cdot b}}=\overline{\bar{a} + \bar{b}}$}\\
+ 			\hline
+		 	
+			%----------XNOR----------
+ 			%Fila 1
+		 	\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{OR}} & \cellcolor{GoogleGreen!30}\\
+		 	\cellcolor{GoogleGreen} \textcolor{white}{$z = a + b$} & \cellcolor{GoogleGreen!30}\multirow{-2}{*}{$z=\overline{\overline{a + b}}=\overline{\bar{a} \cdot \bar{b}}$}\\
+ 			\hline
+	\end{tabular}
+	
+\subsection{\textcolor{GoogleBlue}{Exclusive OR}}
+
+\begin{tabular}{ c c }
+	\textcolor{MaterialPink}{XOR} & \textcolor{MaterialPink}{XNOR} \\ 
+	$z= \bar{a} b + a \bar{b}$  & $z= \overline{\bar{a} b + a \bar{b}}$\\
+	$z=(a+b) \cdot ( \bar{a} + \bar{b} )$ & \\
+	$z = a \oplus b $ & $z = \overline{a \oplus b} $ \\
+\end{tabular}
+
+
+\begin{tabular}{ |c|c|c|cc|c| }
+		\hline
+		\rowcolor{GoogleBlue}\textcolor{white}{\bfseries{Puerta}} & \textcolor{white}{\bfseries{fun./n}} & \textcolor{white}{\bfseries{USA/EU}} & 			\textcolor{white}{\bfseries{a}} & \textcolor{white}{\bfseries{b}} & \textcolor{white}{\bfseries{z}} \\
+		\hline
+			%----------XOR----------
+ 			%Fila 1
+		 	\rowcolor{MaterialLightBlue50} & & & \textcolor{MaterialIndigo}{0 } & \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }\\
+ 			%Fila 2
+ 			\rowcolor{MaterialLightBlue50}&
+ 			\multirow{-2}{*}{$z=a \oplus b$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american xor port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialLightBlue50}& & & \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }\\
+ 			%Fila 4
+ 				\rowcolor{MaterialLightBlue50}\multirow{-4}{*}{\bfseries{XOR}} 
+ 				& 
+ 				\multirow{-2}{*}{7486} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european xor port]{}; \end{circuitikz}} 
+ 				&\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 } \\
+ 			\hline
+			%----------XNOR----------
+ 			%Fila 1
+		 	\rowcolor{MaterialRed50} & & & \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }\\
+ 			%Fila 2
+ 			\rowcolor{MaterialRed50}&
+ 			\multirow{-2}{*}{$z=\overline{a \oplus b}$}
+ 			& 
+ 			\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[american xnor port]{}; \end{circuitikz}} 
+ 			&
+ 			\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }
+ 			\\ 
+ 			%Fila 3
+ 			\rowcolor{MaterialRed50}& & & \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }\\
+ 			%Fila 4
+ 				\rowcolor{MaterialRed50}\multirow{-4}{*}{\bfseries{XNOR}}       
+ 				& 
+ 				\multirow{-2}{*}{74266} 
+ 				& 
+ 				\multirow{-2}{*}{\begin{circuitikz}\draw (0,0) node[european xnor port]{}; \end{circuitikz}} 
+ 				&\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 } \\
+ 			\hline
+	\end{tabular}
+
+\columnbreak
+
+ 	\centering\section{\textcolor{MaterialPurple}{Simplificación de Funciones Lógicas}}
+ 	
+  	\subsection{\textcolor{GoogleBlue}{Simplificación Algebraica}}
+	$ abc \cdots +\bar{a}bc\cdots=(a+\bar{a})bc\cdots=bc\cdots $
+	$ (a+b+c+ \cdots)\cdot(\bar{a}+b+c+\cdots)=a\bar{a}+b+c+\cdots=b+c+\cdots $
+
+  	\subsection{\textcolor{GoogleBlue}{Tablas de Karnaugh}}
+Cambia \textcolor{GoogleRed}{1 variable lógica} por celda \vspace{2 mm}
+
+\begin{tabular}{c c}
+	
+	\begin{tabular}{ |c|c|c| }
+		\hline
+ 			%Fila 1
+			\cellcolor{GoogleBlue}\textcolor{white}{\bfseries{\tikz{\node[below left, inner sep=1pt] (a) {a};
+			\node[above right,inner sep=1pt] (b) {b};
+			\draw (a.north west|-b.north west) -- (a.south east-|b.south east);}}} 
+			&
+			\cellcolor{GoogleBlue} \textcolor{white}{\bfseries{0}}
+			&
+			\cellcolor{GoogleBlue} \textcolor{white}{\bfseries{1}}
+      		\\
+ 			\hline
+ 			%Fila 2
+		 	\cellcolor{GoogleBlue} \textcolor{white}{\bfseries{0}} & \cellcolor{GoogleBlue!30}0 & \cellcolor{GoogleBlue!30}1\\
+ 			\hline
+ 			%Fila 3
+		 	\cellcolor{GoogleBlue} \textcolor{white}{\bfseries{1}} & \cellcolor{GoogleBlue!30}2 & \cellcolor{GoogleBlue!30}3\\
+ 			\hline
+	\end{tabular}
+&
+
+		\begin{tabular}{ |c|c|c|c|c| }
+		\hline
+ 			%Fila 1
+			\cellcolor{GoogleGreen}\textcolor{white}{\bfseries{\tikz{\node[below left, inner sep=1pt] (a) {a};
+			\node[above right,inner sep=1pt] (b) {bc};
+			\draw (a.north west|-b.north west) -- (a.south east-|b.south east);}}} 
+			&
+			\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{00}}
+			&
+			\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{01}}
+			&
+			\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{11}}
+			&
+			\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{10}}
+      		\\
+ 			\hline
+ 			%Fila 2
+		 	\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{0}} 
+		 	&
+		 	\cellcolor{GoogleGreen!30}0 & \cellcolor{GoogleGreen!30}1
+		 	&
+		 	\cellcolor{GoogleGreen!30}3
+		 	&
+		 	\cellcolor{GoogleGreen!30}2
+		 	\\
+ 			\hline
+ 			%Fila 3
+		 	\cellcolor{GoogleGreen} \textcolor{white}{\bfseries{1}} 
+		 	&
+		 	\cellcolor{GoogleGreen!30}4 & \cellcolor{GoogleGreen!30}5
+		 	&
+		 	\cellcolor{GoogleGreen!30}7
+		 	&
+		 	\cellcolor{GoogleGreen!30}6
+		 	\\
+ 			\hline
+	\end{tabular}
+	
+\end{tabular}
+
+  	\subsection{\textcolor{GoogleBlue}{Mapas de Karnaugh}}
+  	$f(a,b,c)=\Sigma(0,1,7)$
+  	
+  	\begin{tabular}{c c}
+  		\begin{tabular}{|c c c || c|}
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey}\textcolor{white}{\bfseries{a}} & \textcolor{white}{\bfseries{b}} & \textcolor{white}{\bfseries{c}} & \textcolor{white}{\bfseries{z}}
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 } & \textcolor{MaterialPink}{1 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 } & \textcolor{MaterialPink}{1 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 } & \textcolor{MaterialIndigo}{0 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 } & \textcolor{MaterialIndigo}{0 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 } & \textcolor{MaterialIndigo}{0 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialPink}{1 } & \textcolor{MaterialIndigo}{0 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialIndigo}{0 }& \textcolor{MaterialIndigo}{0 }
+  		\\
+ 			\hhline{---||-}
+  		\rowcolor{MaterialBlueGrey!20}\textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 }& \textcolor{MaterialPink}{1 } & \textcolor{MaterialPink}{1 }
+  		\\
+  		\hhline{---||-}
+  		\end{tabular}
+  		
+  		&
+  		
+  	\begin{tabular}{c}
+  	\begin{karnaugh-map}[4][2][1][][] % note empty X and Y labels
+    \maxterms{2,3,4,5,6}
+    \minterms{0,1,7}
+    \autoterms[X]
+    \implicant{7}{7}
+    \implicant{0}{1}
+    % note: posistion for start of \draw is (0, Y) where Y is
+    % the Y size(number of cells high) in this case Y=2
+    \draw[color=black, ultra thin] (0, 2) --
+    node [pos=0.7, above right, anchor=south west] {$bc$} % Y label
+    node [pos=0.7, below left, anchor=north east] {$a$} % X label
+    ++(135:1);
+  \end{karnaugh-map}
+ \\
+ $f(a,b,c)=$\colorbox{KarGreen}{$\bar{a}\bar{b}$}$+$\colorbox{KarRed}{$abc$}
+ \end{tabular}
+ 
+  	\end{tabular}
+  	\begin{tabular}{c c}
+	  		\begin{minipage}{2.2in}
+    		%\vskip 4pt
+  			\begin{itemize}
+	  		\item Agrupamos (tamaños):
+  			\subitem 1 $\rightarrow$ Todas la variables (n)
+	  		\subitem 2 $\rightarrow$ (n-1) variables 
+  			\subitem 4 $\rightarrow$ (n-2) variables 
+  			\item {\scriptsize Mínimos} grupos (nadie solo)
+ 			\item[\textcolor{MaterialPink}{\textbullet}]  \textbf{\textcolor{MaterialPink}{Con 1 $\rightarrow$}}
+ 			$f()=\Sigma(\cdot)$ \textcolor{MaterialTeal}{\small\scshape{minterm}}
+ 			\item[\textcolor{MaterialIndigo}{\textbullet}]  \textbf{\textcolor{MaterialIndigo}{Con 0 $\rightarrow$}}
+ 			$f()=\Pi(+)$ \textcolor{MaterialGreen}{\large\scshape{maxterm}}
+  	
+			\end{itemize}
+  		  	\vskip 4pt
+ 			\end{minipage}
+& 
+\begin{tabular}{c}
+\resizebox{(\columnwidth)/3}{!}{  	\begin{karnaugh-map}[4][2][1][][] % note empty X and Y labels
+    \maxterms{2,3,4,5,6}
+    \minterms{0,1,7}
+    \autoterms[X]
+    \implicant{3}{2}
+    \implicant{4}{5}
+    \implicant{2}{6}
+    % note: posistion for start of \draw is (0, Y) where Y is
+    % the Y size(number of cells high) in this case Y=2
+    \draw[color=black, ultra thin] (0, 2) --
+    node [pos=0.7, above right, anchor=south west] {$bc$} % Y label
+    node [pos=0.7, below left, anchor=north east] {$a$} % X label
+    ++(135:1);
+  \end{karnaugh-map}}
+  \\
+  \resizebox{(\columnwidth)/3}{!}{  	\begin{karnaugh-map}[4][2][1][][] % note empty X and Y labels
+    \maxterms{2,3,4,5,6}
+    \minterms{0,1,7}
+    \autoterms[X]
+    \implicant{3}{2}
+    \implicant{4}{5}
+    \implicantedge{4}{4}{6}{6}
+    % note: posistion for start of \draw is (0, Y) where Y is
+    % the Y size(number of cells high) in this case Y=2
+    \draw[color=black, ultra thin] (0, 2) --
+    node [pos=0.7, above right, anchor=south west] {$bc$} % Y label
+    node [pos=0.7, below left, anchor=north east] {$a$} % X label
+    ++(135:1);
+  \end{karnaugh-map}}
+  \end{tabular}
+  \\
+  	\end{tabular}
+ 
+  	\subsection{\textcolor{GoogleBlue}{Funciones Incompletas}}    
+  	
+  	$f()=\Sigma()+\Sigma_{d}()$
+  	\\
+  	\raggedleft\textcolor{MaterialGrey}{\textit{d = don't care}}
+  	
+  	%\resizebox{\columnwidth}{!}{
+
+\end{multicols}
+%\pagebreak
+%\input{tema2}
+\end{document}
